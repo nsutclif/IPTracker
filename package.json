@@ -1,0 +1,23 @@
+{
+  "name": "NSIPTracker",
+  "version": "0.0.0",
+  "description": "NSIPTracker ===========",
+  "main": "index.js",
+  "dependencies": {
+    "mongojs": "~0.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nsutclif/NSIPTracker.git"
+  },
+  "author": "Nathan Sutcliffe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nsutclif/NSIPTracker/issues"
+  },
+  "homepage": "https://github.com/nsutclif/NSIPTracker"
+}
