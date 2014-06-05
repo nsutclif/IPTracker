@@ -4,7 +4,9 @@
   "description": "NSIPTracker ===========",
   "main": "index.js",
   "dependencies": {
-    "mongojs": "~0.13.0"
+    "mongojs": "~0.13.0",
+    "express": "~4.4.1",
+    "logfmt": "~1.1.2"
   },
   "devDependencies": {},
   "scripts": {
