@@ -2,8 +2,8 @@
 var http = require('http');
     mongojs = require("mongojs");
 
-var uri = "mongodb://trackeradmin:earjCfFie7eTuPQt8umB@ds033459.mongolab.com:33459/nsiptracker",
-    db = mongojs.connect(uri, ["nsiptracker"]);
+var uri = process.env.MONGO_URI || "mongodb://devtest:trackerdev@ds031988.mongolab.com:31988/nsiptracker_dev",
+    db = mongojs.connect(uri);
 
 var server = http.createServer(function (request, response) {
     response.writeHead(200, {'Content-Type': 'text/plain'});
@@ -20,9 +20,10 @@ var server = http.createServer(function (request, response) {
 	logged_ipsCollection.insert(document);
 });
 
+var port = Number(process.env.PORT || 3000);
+
 // Start the server on port 3000
-server.listen(3000);
+server.listen(port);
 
 // Print out a nice message so you know that the server started
-console.log('Server running on port 3000');
-
+console.log('Server running on port ' + port);

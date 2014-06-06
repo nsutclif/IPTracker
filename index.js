@@ -1,8 +1,8 @@
 var http = require("http"),
     mongojs = require("mongojs");
 
-var uri = "mongodb://trackeradmin:earjCfFie7eTuPQt8umB@ds033459.mongolab.com:33459/nsiptracker",
-    db = mongojs.connect(uri, ["nsiptracker"]);
+var uri = process.env.MONGO_URI || "mongodb://devtest:trackerdev@ds031988.mongolab.com:31988/nsiptracker_dev",
+    db = mongojs.connect(uri);
 
 var server = http.createServer(requestHandler);
 
