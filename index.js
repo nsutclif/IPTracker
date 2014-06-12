@@ -27,7 +27,7 @@ function requestHandler(request, response) {
         logged_ipsCollection.insert(document);
     }
 
-    logged_ipsCollection.find({}, {limit:5,sort:[['servertime',-1]]}, function(err, records) {
+    logged_ipsCollection.find({}, {limit:6,sort:[['servertime',-1]]}, function(err, records) {
         if(err) {
             console.log("There was an error executing the database query.");
             response.end();
