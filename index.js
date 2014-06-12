@@ -6,10 +6,11 @@ var uri = process.env.MONGO_URI || "mongodb://devtest:trackerdev@ds031988.mongol
     db = mongojs.connect(uri);
 
 function getClientIp(req) {
-    // Copied from StackOverflow
+    // Copied and adapted from StackOverflow
     var ipAddress;
     // Amazon EC2 / Heroku workaround to get real client IP
-    var forwardedIpsStr = req.header('x-forwarded-for');
+    console.log(req);
+    var forwardedIpsStr = req.headers['x-forwarded-for'];
     if (forwardedIpsStr) {
         // 'x-forwarded-for' header may return multiple IP addresses in
         // the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
