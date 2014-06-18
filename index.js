@@ -1,6 +1,7 @@
 var http = require("http"),
     mongojs = require("mongojs");
     url = require("url");
+    express = require('express');
 
 var uri = process.env.MONGO_URI || "mongodb://devtest:trackerdev@ds031988.mongolab.com:31988/nsiptracker_dev",
     db = mongojs.connect(uri);
@@ -9,7 +10,6 @@ function getClientIp(req) {
     // Copied and adapted from StackOverflow
     var ipAddress;
     // Amazon EC2 / Heroku workaround to get real client IP
-    console.log(req);
     var forwardedIpsStr = req.headers['x-forwarded-for'];
     if (forwardedIpsStr) {
         // 'x-forwarded-for' header may return multiple IP addresses in
@@ -33,7 +33,6 @@ function requestHandler(request, response) {
     
     var url_parts = url.parse(request.url, true);
     var query = url_parts.query;
-    console.log(query);
     
     var computername = query.computername;
     
@@ -44,7 +43,6 @@ function requestHandler(request, response) {
             servertime:new Date()
         };
     
-        console.log(document);
         logged_ipsCollection.insert(document);
     }
 
@@ -76,10 +74,12 @@ function requestHandler(request, response) {
     });
 }
 
-var server = http.createServer(requestHandler);
-
 var port = Number(process.env.PORT || 3000);
 
-server.listen(port);
+var app = express();
+
+app.get('/', requestHandler);
+
+app.listen(port);
 
 console.log('Server running on port ' + port);
