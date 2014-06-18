@@ -52,7 +52,23 @@ function requestHandler(request, response) {
             response.end();
             return;
         }
-        var html = '<h2>Logged IPs</h2>',
+        var html = 
+            '<html lang="en">\n'
+          + '  <head>\n'
+          + '    <meta charset="utf-8">\n'
+          + '    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n'
+          + '    <meta name="viewport" content="width=device-width, initial-scale=1">\n'
+          + '    <title>IP Tracker</title>\n'
+          + '    <!-- Bootstrap -->\n'
+          + '    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n'
+          + '  </head>\n'
+          + ''
+          + '<body role="document">\n'
+          + '<div class="container">\n'
+          + '  <div class="page-header">\n'
+          + '    <h2>Logged IPs</h2>\n'
+          + '  </div>\n'
+        
         i = records.length;
 
         while(i--) {
@@ -64,10 +80,23 @@ function requestHandler(request, response) {
                  + records[i].servertime
         }
         
-        html += '<form>';
-        html += 'Computer Name: <input type="text" name="computername">';
-        html += '<input type="submit" value="Log IP">';
-        html += '</form>'
+        html += '<form>\n'
+              + 'Computer Name: <input type="text" name="computername">\n'
+              + '<input type="submit" value="Log IP">\n'
+              + '</form>\n'
+   
+    
+    
+    
+    
+              + ' <!-- Bootstrap core JavaScript\n'
+              + '================================================== -->\n'
+              + '<!-- Placed at the end of the document so the pages load faster -->\n'
+              + '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>\n'
+              + '<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>\n'
+              + '</div>'
+              + '</body>\n'
+              + '</html>';
         
         response.write(html);
         response.end();                            
@@ -79,6 +108,7 @@ var port = Number(process.env.PORT || 3000);
 var app = express();
 
 app.get('/', requestHandler);
+
 
 app.listen(port);
 
