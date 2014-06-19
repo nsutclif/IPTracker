@@ -58,7 +58,7 @@ function requestHandler(request, response) {
           + '    <meta charset="utf-8">\n'
           + '    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n'
           + '    <meta name="viewport" content="width=device-width, initial-scale=1">\n'
-          + '    <title>IP Tracker</title>\n'
+          + '    <title>NS IP Tracker</title>\n'
           + '    <!-- Bootstrap -->\n'
           + '    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">\n'
           + '  </head>\n'
