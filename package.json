@@ -2,11 +2,24 @@
   "name": "NSIPTracker",
   "version": "0.0.0",
   "description": "NSIPTracker ===========",
-  "main": "index.js",
-  "dependencies": {
-    "mongojs": "~0.13.0",
-    "express": "~4.4.3",
-    "logfmt": "~1.1.2"
+  "main": "server.js",
+  "dependencies" : {
+    "express" : "~4.0.0", 			
+    "ejs" : "~0.8.5", 				
+    "mongoose" : "~3.8.1", 			
+    "passport" : "~0.1.17", 		
+    "passport-local" : "~0.1.6", 	
+    "passport-facebook" : "~1.0.2", 
+    "passport-twitter" : "~1.0.2", 	
+    "passport-google-oauth" : "~0.1.5",
+    "connect-flash" : "~0.1.1", 	
+    "bcrypt-nodejs" : "latest",
+
+    "morgan": "~1.0.0",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "express-session": "~1.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -14,12 +27,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nsutclif/NSIPTracker.git"
+    "url": "git://github.com/nsutclif/IPTracker.git"
   },
-  "author": "Nathan Sutcliffe",
-  "license": "ISC",
+  "author": "Nathan and Terry",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/nsutclif/NSIPTracker/issues"
+    "url": "https://github.com/nsutclif/IPTracker/issues"
   },
-  "homepage": "https://github.com/nsutclif/NSIPTracker"
+  "homepage": "https://github.com/nsutclif/IPTracker"
 }
