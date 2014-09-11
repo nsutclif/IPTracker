@@ -6,7 +6,7 @@ module.exports = {
 	'facebookAuth' : {
 		'clientID' 		: process.env.FACEBOOK_OAUTH_CLIENT_ID, // Can't store these in GitHub.
 		'clientSecret' 	: process.env.FACEBOOK_OAUTH_CLIENT_SECRET, // Can't store these in GitHub.
-		'callbackURL' 	: 'http://localhost:8080/auth/facebook/callback'
+		'callbackURL' 	: '/auth/facebook/callback'
 	},
 
 	'twitterAuth' : {
