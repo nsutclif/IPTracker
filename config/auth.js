@@ -16,9 +16,9 @@ module.exports = {
 	},
 
 	'googleAuth' : {
-		'clientID' 		: 'your-secret-clientID-here',
-		'clientSecret' 	: 'your-client-secret-here',
-		'callbackURL' 	: 'http://localhost:8080/auth/google/callback'
+		'clientID' 		: process.env.GOOGLE_OAUTH_CLIENT_ID, // Can't really store these in GitHub...
+		'clientSecret' 	: process.env.GOOGLE_OAUTH_CLIENT_SECRET, // Can't really store these in GitHub...
+		'callbackURL' 	: '/auth/google/callback'
 	}
 
 };
