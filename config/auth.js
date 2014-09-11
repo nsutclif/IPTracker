@@ -4,8 +4,8 @@
 module.exports = {
 
 	'facebookAuth' : {
-		'clientID' 		: 'your-secret-clientID-here', // your App ID
-		'clientSecret' 	: 'your-client-secret-here', // your App Secret
+		'clientID' 		: process.env.FACEBOOK_OAUTH_CLIENT_ID, // Can't store these in GitHub.
+		'clientSecret' 	: process.env.FACEBOOK_OAUTH_CLIENT_SECRET, // Can't store these in GitHub.
 		'callbackURL' 	: 'http://localhost:8080/auth/facebook/callback'
 	},
 
@@ -16,8 +16,8 @@ module.exports = {
 	},
 
 	'googleAuth' : {
-		'clientID' 		: process.env.GOOGLE_OAUTH_CLIENT_ID, // Can't really store these in GitHub...
-		'clientSecret' 	: process.env.GOOGLE_OAUTH_CLIENT_SECRET, // Can't really store these in GitHub...
+		'clientID' 		: process.env.GOOGLE_OAUTH_CLIENT_ID, // Can't store these in GitHub.
+		'clientSecret' 	: process.env.GOOGLE_OAUTH_CLIENT_SECRET, // Can't store these in GitHub.
 		'callbackURL' 	: '/auth/google/callback'
 	}
 
