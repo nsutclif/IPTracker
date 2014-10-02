@@ -1,4 +1,8 @@
-module.exports = function(app, passport) {
+module.exports = function(app, passport, express) {
+    
+// Angular SPA Routes
+    app.use('/angular', express.static(__dirname + '/client'));
+    
 
 // normal routes ===============================================================
 
