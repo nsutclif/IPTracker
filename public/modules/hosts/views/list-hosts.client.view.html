@@ -1,0 +1,19 @@
+<section data-ng-controller="HostsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Hosts</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="host in hosts" data-ng-href="#!/hosts/{{host._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="host.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="host.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="host.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!hosts.$resolved || hosts.length">
+    	No Hosts yet, why don't you <a href="/#!/hosts/create">create one</a>?
+    </div>
+</section>
