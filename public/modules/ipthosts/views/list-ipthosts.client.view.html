@@ -1,0 +1,19 @@
+<section data-ng-controller="IpthostsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Ipthosts</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="ipthost in ipthosts" data-ng-href="#!/ipthosts/{{ipthost._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="ipthost.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="ipthost.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="ipthost.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!ipthosts.$resolved || ipthosts.length">
+    	No Ipthosts yet, why don't you <a href="/#!/ipthosts/create">create one</a>?
+    </div>
+</section>
