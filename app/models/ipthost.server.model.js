@@ -23,7 +23,19 @@ var IpthostSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	alertOnChange: {
+		type: Boolean,
+		default: true
+	},
+	alertTimeoutMinutes: {
+		type: Number,
+		min: 15,
+		max: 1440
 	}
+	// alertOnChange
+	// alertTimeout
+
 });
 
 mongoose.model('Ipthost', IpthostSchema);

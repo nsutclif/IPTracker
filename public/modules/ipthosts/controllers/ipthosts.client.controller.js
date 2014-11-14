@@ -9,7 +9,9 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 		$scope.create = function() {
 			// Create new Ipthost object
 			var ipthost = new Ipthosts ({
-				name: this.name
+				name: this.name,
+				alertOnChange: this.alertOnChange,
+				alertTimeoutMinutes: this.alertTimeoutMinutes
 			});
 
 			// Redirect after save
