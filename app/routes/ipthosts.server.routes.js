@@ -17,3 +17,7 @@ module.exports = function(app) {
 	// Finish by binding the Ipthost middleware
 	app.param('ipthostId', ipthosts.ipthostByID);
 };
+
+
+
+// does it make any sense to add iptevent in here?
