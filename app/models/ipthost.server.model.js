@@ -32,10 +32,13 @@ var IpthostSchema = new Schema({
 		type: Number,
 		min: 15,
 		max: 1440
+	},
+	lastEventTime: {
+		type: Date
+	},
+	lastEventIP: {
+		type: String
 	}
-	// alertOnChange
-	// alertTimeout
-
 });
 
 mongoose.model('Ipthost', IpthostSchema);

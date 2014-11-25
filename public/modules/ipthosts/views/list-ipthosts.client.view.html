@@ -1,19 +1,21 @@
 <section data-ng-controller="IpthostsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Ipthosts</h1>
+        <h1>Hosts</h1>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="ipthost in ipthosts" data-ng-href="#!/ipthosts/{{ipthost._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="ipthost.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="ipthost.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="ipthost.name"></h4>
-        </a>
-    </div>
+    <table class="table">
+        <tr data-ng-repeat="ipthost in ipthosts">
+            <td>
+                <a data-ng-href="#!/ipthosts/{{ipthost._id}}"><h4 data-ng-bind="ipthost.name"></h4></a>
+            </td>
+            <td>
+                <span data-ng-bind="ipthost.lastEventIP"></span>
+            </td>
+            <td>
+                <span data-ng-bind="ipthost.lastEventTime"></span>
+            </td>
+        </tr>
+    </table>
     <div class="alert alert-warning text-center" data-ng-hide="!ipthosts.$resolved || ipthosts.length">
-    	No Ipthosts yet, why don't you <a href="/#!/ipthosts/create">create one</a>?
+    	No hosts yet, why don't you <a href="/#!/ipthosts/create">add one</a>?
     </div>
 </section>

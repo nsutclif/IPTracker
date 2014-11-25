@@ -1,6 +1,10 @@
 <section data-ng-controller="IpthostsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="ipthost.name"></h1>
+		<h1>Host: <span data-ng-bind="ipthost.name"></span></h1>
+		<div><span data-ng-bind="ipthost.lastEventIP"></span><span data-ng-show="ipthost.alertOnChange"> (Alert On Change)</span></div>
+		<div>Last Update: <span data-ng-bind="ipthost.lastEventTime"></span></div>
+		<div>Update URL:</div>
+		<div>{{getUpdateURL(ipthost)}}</div>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == ipthost.user._id">
 		<a class="btn btn-primary" href="/#!/ipthosts/{{ipthost._id}}/edit">
@@ -10,12 +14,4 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="ipthost.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="ipthost.user.displayName"></span>
-		</em>
-	</small>
 </section>

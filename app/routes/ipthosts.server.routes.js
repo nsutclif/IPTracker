@@ -14,8 +14,12 @@ module.exports = function(app) {
 		.put(users.requiresLogin, ipthosts.hasAuthorization, ipthosts.update)
 		.delete(users.requiresLogin, ipthosts.hasAuthorization, ipthosts.delete);
 
+	app.route('/e/:ipthostId')
+		.get(ipthosts.logEvent);
+
 	// Finish by binding the Ipthost middleware
 	app.param('ipthostId', ipthosts.ipthostByID);
+
 };
 
 

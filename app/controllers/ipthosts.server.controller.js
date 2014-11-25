@@ -95,6 +95,27 @@ exports.ipthostByID = function(req, res, next, id) { Ipthost.findById(id).popula
 };
 
 /**
+ * Log an event for the Ipthost
+ */
+
+exports.logEvent = function(req, res) {
+	var ipthost = req.ipthost;
+
+	ipthost.lastEventIP = req.connection.remoteAddress;
+	ipthost.lastEventTime = new Date();
+
+	ipthost.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(ipthost);
+		}
+	});
+};
+
+/**
  * Ipthost authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
