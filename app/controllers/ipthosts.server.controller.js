@@ -94,6 +94,27 @@ exports.ipthostByID = function(req, res, next, id) { Ipthost.findById(id).popula
 	});
 };
 
+function getClientIP(req) {
+	// Copied and adapted from StackOverflow
+	var ipAddress;
+	// Amazon EC2 / Heroku workaround to get real client IP
+	console.log(req);
+	var forwardedIpsStr = req.headers['x-forwarded-for'];
+	if (forwardedIpsStr) {
+		// 'x-forwarded-for' header may return multiple IP addresses in
+		// the format: "client IP, proxy 1 IP, proxy 2 IP" so take the
+		// the first one
+		var forwardedIps = forwardedIpsStr.split(',');
+		ipAddress = forwardedIps[0];
+	}
+	if (!ipAddress) {
+		// Ensure getting client IP address still works in
+		// development environment
+		ipAddress = req.connection.remoteAddress;
+	}
+	return ipAddress;
+};
+
 /**
  * Log an event for the Ipthost
  */
@@ -101,7 +122,7 @@ exports.ipthostByID = function(req, res, next, id) { Ipthost.findById(id).popula
 exports.logEvent = function(req, res) {
 	var ipthost = req.ipthost;
 
-	ipthost.lastEventIP = req.connection.remoteAddress;
+	ipthost.lastEventIP = getClientIP(req);
 	ipthost.lastEventTime = new Date();
 
 	ipthost.save(function(err) {
