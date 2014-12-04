@@ -72,15 +72,20 @@ exports.delete = function(req, res) {
 /**
  * List of Ipthosts
  */
-exports.list = function(req, res) { Ipthost.find().sort('-created').populate('user', 'displayName').exec(function(err, ipthosts) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(ipthosts);
-		}
-	});
+exports.list = function(req, res) {
+	Ipthost
+		.find({ user: req.user.id })
+		.sort('-created')
+		.populate('user', 'displayName')
+		.exec(function(err, ipthosts) {
+			if (err) {
+				return res.status(400).send({
+					message: errorHandler.getErrorMessage(err)
+				});
+			} else {
+				res.jsonp(ipthosts);
+			}
+		});
 };
 
 /**
