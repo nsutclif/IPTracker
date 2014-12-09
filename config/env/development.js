@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://devtest:trackerdev@ds031988.mongolab.com:31988/nsiptracker_dev',
+	db: process.env.MONGOLAB_URI,
 	app: {
 		title: 'IPTrackerTN - Development Environment'
 	},
