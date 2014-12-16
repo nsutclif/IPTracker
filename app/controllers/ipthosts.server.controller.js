@@ -118,7 +118,7 @@ function getClientIP(req) {
 		ipAddress = req.connection.remoteAddress;
 	}
 	return ipAddress;
-};
+}
 
 /**
  * Log an event for the Ipthost

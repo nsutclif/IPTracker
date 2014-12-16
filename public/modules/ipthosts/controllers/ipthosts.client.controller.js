@@ -66,6 +66,6 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 
 		$scope.getUpdateURL = function( ipthost ) {
 			return $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/e/' + ipthost._id;
-		}
+		};
 	}
 ]);
