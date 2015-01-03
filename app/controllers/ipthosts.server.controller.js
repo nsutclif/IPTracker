@@ -140,6 +140,9 @@ function handleChangedIP(ipthost, prevIP, user) {
 		text: 'Previous IP Address: ' + prevIP + '\n' + 'New IP Address: ' + ipthost.lastEventIP
 	};
 
+	console.log(config.mailer.options.auth.user);
+	console.log(config.mailer.options.auth.pass);
+
 	transporter.sendMail(ipChangeEmail, function(error, info){
 		if(error){
 			console.log(error);
