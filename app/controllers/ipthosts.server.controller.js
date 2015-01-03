@@ -6,7 +6,9 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
 	Ipthost = mongoose.model('Ipthost'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	config = require('../../config/config'),
+	nodemailer = require('nodemailer');
 
 /**
  * Create a Ipthost
@@ -120,6 +122,33 @@ function getClientIP(req) {
 	return ipAddress;
 }
 
+function handleChangedIP(ipthost, prevIP, user) {
+	if (!ipthost.alertOnChange)
+	  return;
+
+	// FUTURE:
+	// - Put emails in a queue and have a separate service sending emails.
+	// - Switch to using oauth (?) here and disable access for "less secure apps":
+	// https://www.google.com/settings/u/1/security/lesssecureapps
+
+	var transporter = nodemailer.createTransport(config.mailer.options);
+
+	var ipChangeEmail = {
+		from: config.mailer.from,
+		to: user.email,
+		subject: 'New IP Address for ' + ipthost.name,
+		text: 'Previous IP Address: ' + prevIP + '\n' + 'New IP Address: ' + ipthost.lastEventIP
+	};
+
+	transporter.sendMail(ipChangeEmail, function(error, info){
+		if(error){
+			console.log(error);
+		}else{
+			console.log('Message sent: ' + info.response);
+		}
+	});
+}
+
 /**
  * Log an event for the Ipthost
  */
@@ -127,8 +156,14 @@ function getClientIP(req) {
 exports.logEvent = function(req, res) {
 	var ipthost = req.ipthost;
 
+	var prevIP = ipthost.lastEventIP;
+
 	ipthost.lastEventIP = getClientIP(req);
 	ipthost.lastEventTime = new Date();
+
+	if ((typeof prevIP !== 'undefined') && (ipthost.lastEventIP !== prevIP)) {
+		handleChangedIP(ipthost, prevIP, req.user);
+	}
 
 	ipthost.save(function(err) {
 		if (err) {
