@@ -128,8 +128,6 @@ function handleChangedIP(ipthost, prevIP, user) {
 
 	// FUTURE:
 	// - Put emails in a queue and have a separate service sending emails.
-	// - Switch to using oauth (?) here and disable access for "less secure apps":
-	// https://www.google.com/settings/u/1/security/lesssecureapps
 
 	var transporter = nodemailer.createTransport(config.mailer.options);
 
@@ -139,10 +137,6 @@ function handleChangedIP(ipthost, prevIP, user) {
 		subject: 'New IP Address for ' + ipthost.name,
 		text: 'Previous IP Address: ' + prevIP + '\n' + 'New IP Address: ' + ipthost.lastEventIP
 	};
-
-	console.log(JSON.stringify(config.mailer.options));
-	console.log(config.mailer.options.auth.user);
-	console.log(config.mailer.options.auth.pass);
 
 	transporter.sendMail(ipChangeEmail, function(error, info){
 		if(error){
