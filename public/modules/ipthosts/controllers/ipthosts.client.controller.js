@@ -74,16 +74,16 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 		}
 
 		$scope.isUnderTimeout = function(ipthost) {
-			return Date.now() < getTimeoutTime(ipthost)
-		}
+			return Date.now() < getTimeoutTime(ipthost);
+		};
 
 		$scope.isOverTimeout = function(ipthost) {
-			return Date.now() > getTimeoutTime(ipthost)
-		}
+			return Date.now() > getTimeoutTime(ipthost);
+		};
 
 		$scope.getLocalDateTime = function(ipthost) {
 			var lastEventTime = new Date(ipthost.lastEventTime);
 			return lastEventTime.toLocaleString();
-		}
+		};
 	}
 ]);
