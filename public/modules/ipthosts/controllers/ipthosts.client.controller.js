@@ -64,8 +64,26 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 			});
 		};
 
-		$scope.getUpdateURL = function( ipthost ) {
+		$scope.getUpdateURL = function(ipthost) {
 			return $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/e/' + ipthost._id;
 		};
+
+		function getTimeoutTime(ipthost){
+			var lastEventTime = new Date(ipthost.lastEventTime);
+			return new Date(lastEventTime.getTime() + ipthost.alertTimeoutMinutes * 60 * 1000);
+		}
+
+		$scope.isUnderTimeout = function(ipthost) {
+			return Date.now() < getTimeoutTime(ipthost)
+		}
+
+		$scope.isOverTimeout = function(ipthost) {
+			return Date.now() > getTimeoutTime(ipthost)
+		}
+
+		$scope.getLocalDateTime = function(ipthost) {
+			var lastEventTime = new Date(ipthost.lastEventTime);
+			return lastEventTime.toLocaleString();
+		}
 	}
 ]);

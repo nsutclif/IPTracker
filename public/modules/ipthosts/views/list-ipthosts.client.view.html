@@ -3,7 +3,8 @@
         <h1>Hosts</h1>
     </div>
     <table class="table">
-        <tr data-ng-repeat="ipthost in ipthosts">
+        <tr data-ng-repeat="ipthost in ipthosts"
+            ng-class="{'underTimeoutClass':isUnderTimeout(ipthost), 'overTimeoutClass':isOverTimeout(ipthost)}">
             <td>
                 <a data-ng-href="#!/ipthosts/{{ipthost._id}}"><h4 data-ng-bind="ipthost.name"></h4></a>
             </td>
@@ -11,7 +12,7 @@
                 <span data-ng-bind="ipthost.lastEventIP"></span>
             </td>
             <td>
-                <span data-ng-bind="ipthost.lastEventTime"></span>
+                <span data-ng-bind="getLocalDateTime(ipthost)"></span>
             </td>
         </tr>
     </table>
