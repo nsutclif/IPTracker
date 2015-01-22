@@ -1,8 +1,8 @@
 'use strict';
 
 // Ipthosts controller
-angular.module('ipthosts').controller('IpthostsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Ipthosts',
-	function($scope, $stateParams, $location, Authentication, Ipthosts ) {
+angular.module('ipthosts').controller('IpthostsController', ['$scope', '$stateParams', '$location', '$interval', 'Authentication', 'Ipthosts',
+	function($scope, $stateParams, $location, $interval, Authentication, Ipthosts ) {
 		$scope.authentication = Authentication;
 
 		// Create new Ipthost
@@ -24,6 +24,10 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		$interval(function(){
+			$scope.find();
+		},1000 * 60 * 5);
 
 		// Remove existing Ipthost
 		$scope.remove = function( ipthost ) {
