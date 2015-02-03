@@ -6,11 +6,18 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 		// Redirect to home view when route not found
 		$urlRouterProvider.otherwise('/');
 
-		// Home state routing
-		$stateProvider.
-		state('home', {
-			url: '/',
-			templateUrl: 'modules/core/views/home.client.view.html'
-		});
+        // Home state routing
+        $stateProvider.
+            state('home', {
+                url: '/',
+                templateUrl: 'modules/core/views/home.client.view.html'
+            });
+
+        // Home state routing
+        $stateProvider.
+            state('about', {
+                url: '/about',
+                templateUrl: 'modules/core/views/about.client.view.html'
+            });
 	}
 ]);
