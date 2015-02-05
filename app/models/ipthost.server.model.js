@@ -33,6 +33,13 @@ var IpthostSchema = new Schema({
 		min: 15,
 		max: 1440
 	},
+    alertTimeout: {
+        type:Date
+    },
+    alertTimeoutSent: {
+        type: Boolean,
+        default: false
+    },
 	lastEventTime: {
 		type: Date
 	},

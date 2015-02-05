@@ -30,7 +30,19 @@ var db = mongoose.connect(config.db, function (err) {
         // Expose app
         exports = module.exports = app;
 
+        // Ideally, the timeout check stuff would be in a separate process, but then I'm not sure Heroku would be
+        // quite as free any more...
+        var cron = require('cron');
+        var timeoutCheck = require('./utilities/timeoutcheck');
+        try {
+            var timeoutCheckJob = new cron.CronJob('*/1 * * * *', timeoutCheck.check);
+            timeoutCheckJob.start();
+        } catch(e) {
+            console.log('exception setting up cron job: ' + e);
+        }
+
         // Logging initialization
         console.log('MEAN.JS application started on port ' + config.port);
+
     }
 });

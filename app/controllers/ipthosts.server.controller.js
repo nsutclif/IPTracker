@@ -35,6 +35,25 @@ exports.read = function(req, res) {
 	res.jsonp(req.ipthost);
 };
 
+function internalSave(ipthost,res) {
+    if (ipthost.alertTimeoutMinutes===0) {
+        delete ipthost.alertTimeout;
+    } else {
+        var lastEventTime = new Date(ipthost.lastEventTime);
+        ipthost.alertTimeout = new Date(lastEventTime.getTime() + ipthost.alertTimeoutMinutes * 60 * 1000);
+    }
+
+    ipthost.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(ipthost);
+        }
+    });
+}
+
 /**
  * Update a Ipthost
  */
@@ -43,15 +62,7 @@ exports.update = function(req, res) {
 
 	ipthost = _.extend(ipthost , req.body);
 
-	ipthost.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(ipthost);
-		}
-	});
+    return internalSave(ipthost, res);
 };
 
 /**
@@ -163,15 +174,8 @@ exports.logEvent = function(req, res) {
 		handleChangedIP(ipthost, prevIP, req.user);
 	}
 
-	ipthost.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(ipthost);
-		}
-	});
+    console.log(JSON.stringify(ipthost));
+	return internalSave(ipthost, res);
 };
 
 /**
