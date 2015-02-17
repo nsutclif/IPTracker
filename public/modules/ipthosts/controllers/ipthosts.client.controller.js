@@ -16,7 +16,7 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 
 			// Redirect after save
 			ipthost.$save(function(response) {
-				$location.path('ipthosts/' + response._id);
+				$location.path('ipthosts/' + response._id + '/edit');
 
 				// Clear form fields
 				$scope.name = '';

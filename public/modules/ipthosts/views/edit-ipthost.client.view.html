@@ -1,6 +1,6 @@
 <section data-ng-controller="IpthostsController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1>Edit Ipthost</h1>
+        <h1>Settings for {{ipthost.name}}</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
@@ -24,12 +24,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
+                    <input type="submit" value="Update" class="btn btn-primary">
+                    <input type="button" value="Delete" class="btn btn-danger" data-ng-click="remove();">
                 </div>
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
             </fieldset>
         </form>
+    </div>
+    <div>
+        <div class="page-header">
+            <h1>Details</h1>
+        </div>
+        <div>Current IP: {{ipthost.lastEventIP}}</div>
+        <div>Last Updated: {{getLocalDateTime(ipthost)}}</div>
+        <div>Update URL:</div>
+        <div>{{getUpdateURL(ipthost)}}</div>
     </div>
 </section>

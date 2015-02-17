@@ -283,15 +283,7 @@ angular.module('core').service('Menus', [
 ]);
 'use strict';
 
-// Configuring the Articles module
-angular.module('ipthosts').run(['Menus',
-	function(Menus) {
-		// Set top bar menu items
-		Menus.addMenuItem('topbar', 'Hosts', 'ipthosts', 'dropdown', '/ipthosts(/create)?');
-		Menus.addSubMenuItem('topbar', 'ipthosts', 'List Hosts', 'ipthosts');
-		Menus.addSubMenuItem('topbar', 'ipthosts', 'New Host', 'ipthosts/create');
-	}
-]);
+// No longer have a menu for Hosts.
 
 'use strict';
 
@@ -300,17 +292,9 @@ angular.module('ipthosts').config(['$stateProvider',
 	function($stateProvider) {
 		// Ipthosts state routing
 		$stateProvider.
-		state('listIpthosts', {
-			url: '/ipthosts',
-			templateUrl: 'modules/ipthosts/views/list-ipthosts.client.view.html'
-		}).
 		state('createIpthost', {
 			url: '/ipthosts/create',
 			templateUrl: 'modules/ipthosts/views/create-ipthost.client.view.html'
-		}).
-		state('viewIpthost', {
-			url: '/ipthosts/:ipthostId',
-			templateUrl: 'modules/ipthosts/views/view-ipthost.client.view.html'
 		}).
 		state('editIpthost', {
 			url: '/ipthosts/:ipthostId/edit',
@@ -318,6 +302,7 @@ angular.module('ipthosts').config(['$stateProvider',
 		});
 	}
 ]);
+
 'use strict';
 
 // Ipthosts controller
@@ -336,7 +321,7 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 
 			// Redirect after save
 			ipthost.$save(function(response) {
-				$location.path('ipthosts/' + response._id);
+				$location.path('ipthosts/' + response._id + '/edit');
 
 				// Clear form fields
 				$scope.name = '';

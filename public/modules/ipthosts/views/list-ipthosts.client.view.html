@@ -6,17 +6,17 @@
         <tr data-ng-repeat="ipthost in ipthosts"
             ng-class="{'underTimeoutClass':isUnderTimeout(ipthost), 'overTimeoutClass':isOverTimeout(ipthost)}">
             <td>
-                <a data-ng-href="#!/ipthosts/{{ipthost._id}}"><h4 data-ng-bind="ipthost.name"></h4></a>
+                <a data-ng-href="#!/ipthosts/{{ipthost._id}}/edit">{{ipthost.name}}</a>
             </td>
             <td>
-                <span data-ng-bind="ipthost.lastEventIP"></span>
+                {{ipthost.lastEventIP}}
             </td>
             <td>
-                <span data-ng-bind="getLocalDateTime(ipthost)"></span>
+                {{getLocalDateTime(ipthost)}}
             </td>
         </tr>
     </table>
-    <div class="alert alert-warning text-center" data-ng-hide="!ipthosts.$resolved || ipthosts.length">
-    	No hosts yet, why don't you <a href="/#!/ipthosts/create">add one</a>?
-    </div>
+    <a class="btn btn-default" href="/#!/ipthosts/create">
+        <i class="glyphicon glyphicon-plus-sign">New</i>
+    </a>
 </section>
