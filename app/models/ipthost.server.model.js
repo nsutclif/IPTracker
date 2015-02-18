@@ -30,7 +30,7 @@ var IpthostSchema = new Schema({
 	},
 	alertTimeoutMinutes: {
 		type: Number,
-		min: 15,
+		min: 0,
 		max: 1440
 	},
     alertTimeout: {

@@ -12,13 +12,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="alertOnChange">Alert On Change</label>
+                    <label class="control-label" for="alertOnChange">Send Email when IP Address Changes</label>
                     <div class="controls">
                         <input type="checkbox" data-ng-model="alertOnChange" id="alertOnChange" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="alertTimeoutMinutes">Alert Timeout (Minutes)</label>
+                    <label class="control-label" for="alertOnTimeout">Send Email when IP Address doesn't get Updated for a While</label>
+                    <div class="controls">
+                        <input type="checkbox" data-ng-model="alertOnTimeout" id="alertOnTimeout" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group" data-ng-show="alertOnTimeout">
+                    <label class="control-label" for="alertTimeoutMinutes">Timeout (Minutes)</label>
                     <div class="controls">
                         <input type="number" min="15" max="1440" data-ng-model="alertTimeoutMinutes" id="alertTimeoutMinutes" class="form-control">
                     </div>
