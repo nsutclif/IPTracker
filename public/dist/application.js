@@ -310,6 +310,8 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, $interval, Authentication, Ipthosts ) {
 		$scope.authentication = Authentication;
 
+        $scope.alertTimeoutMinutes = 15; // default timeout to 15 minutes
+
 		// Create new Ipthost
 		$scope.create = function() {
 			// Create new Ipthost object
@@ -318,6 +320,10 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 				alertOnChange: this.alertOnChange,
 				alertTimeoutMinutes: this.alertTimeoutMinutes
 			});
+
+            if (!this.alertOnChange) {
+                ipthost.alertTimeoutMinutes = 0;
+            }
 
 			// Redirect after save
 			ipthost.$save(function(response) {
@@ -383,16 +389,18 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 		}
 
 		$scope.isUnderTimeout = function(ipthost) {
-			return Date.now() < getTimeoutTime(ipthost);
+			return (ipthost.alertTimeoutMinutes !==0) && (Date.now() < getTimeoutTime(ipthost));
 		};
 
 		$scope.isOverTimeout = function(ipthost) {
-			return Date.now() > getTimeoutTime(ipthost);
+			return (ipthost.alertTimeoutMinutes !==0) && (Date.now() > getTimeoutTime(ipthost));
 		};
 
 		$scope.getLocalDateTime = function(ipthost) {
 			var lastEventTime = new Date(ipthost.lastEventTime);
-			return lastEventTime.toLocaleString();
+            if (!isNaN( lastEventTime.getTime() )) {
+                return lastEventTime.toLocaleString();
+            }
 		};
 	}
 ]);
