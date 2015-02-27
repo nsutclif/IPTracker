@@ -1,5 +1,7 @@
 # IP Tracker
 
+This is my first single page web application!  I built it just to see how the pieces fit together and to try out the MEAN framework.
+
 * Find out the IP Addresses of all your stuff
 * Get an email when those IP Addresses change
 * Get an email when your stuff goes offline
