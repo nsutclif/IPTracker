@@ -45,7 +45,10 @@
         </div>
         <div>Current IP: {{ipthost.lastEventIP}}</div>
         <div>Last Updated: {{getLocalDateTime(ipthost)}}</div>
-        <div>Update URL:</div>
+        <div class="page-header">
+            <h1>Updating this IP</h1>
+        </div>
+        <div>To update this computer's IP Address, call this URL:</div>
         <div>{{getUpdateURL(ipthost)}}</div>
     </div>
 </section>
