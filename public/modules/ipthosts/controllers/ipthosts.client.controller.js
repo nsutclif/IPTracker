@@ -7,6 +7,8 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 
         $scope.alertTimeoutMinutes = 15; // default timeout to 15 minutes
 
+		$scope.hostType = 'Mac';
+
 		// Create new Ipthost
 		$scope.create = function() {
 			// Create new Ipthost object

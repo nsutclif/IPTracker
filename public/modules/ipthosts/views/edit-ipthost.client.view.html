@@ -48,7 +48,77 @@
         <div class="page-header">
             <h1>Updating this IP</h1>
         </div>
-        <div>To update this computer's IP Address, call this URL:</div>
-        <div>{{getUpdateURL(ipthost)}}</div>
+        <form class="form-inline" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="hostType">Instructions for </label>
+                    <select data-ng-model="hostType" id="hostType" class="form-control">
+                        <option value="Mac">Mac OS 10.4+</option>
+                        <option value="Windows">Windows</option>
+                        <option value="Linux">Linux</option>
+                    </select>
+                </div>
+            </fieldset>
+        </form>
+
+        <div data-ng-show="hostType=='Mac'">
+
+
+            <div>To update this computer's IP Address:</div>
+            <ul>
+                <li>Open Terminal</li>
+                <li>type <pre>sudo nano /Library/LaunchDaemons/com.herokuapp.iptrackertn.plist</pre> to create a new launchd configuration file</li>
+                <li>
+                    Paste in the following:
+                    <pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+        &lt;key&gt;Label&lt;/key&gt;
+        &lt;string&gt;com.herokuapp.iptrackertn.update&lt;/string&gt;
+	&lt;key&gt;ProgramArguments&lt;/key&gt;
+	&lt;array&gt;
+		&lt;string&gt;curl&lt;/string&gt;
+		&lt;string&gt;{{getUpdateURL(ipthost)}}&lt;/string&gt;
+	&lt;/array&gt;
+	&lt;key&gt;RunAtLoad&lt;/key&gt;
+	&lt;true/&gt;
+	&lt;key&gt;StartInterval&lt;/key&gt;
+	&lt;integer&gt;900&lt;/integer&gt;
+	&lt;key&gt;StandardErrorPath&lt;/key&gt;
+	&lt;string&gt;/dev/null&lt;/string&gt;
+	&lt;key&gt;StandardOutPath&lt;/key&gt;
+	&lt;string&gt;/dev/null&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</pre>
+                </li>
+                <li>Type Control-X to Exit and Y to save</li>
+                <li>Type <pre>sudo launchctl load /Library/LaunchDaemons/com.herokuapp.iptrackertn.plist</pre> to start updating without rebooting.</li>
+            </ul>
+        </div>
+        <div data-ng-show="hostType=='Windows'">
+            <div>To update this computer's IP Address:</div>
+            <ul>
+                <li>Open Task Scheduler</li>
+                <li>Select Task Scheduler Library</li>
+                <li>Click on Create Task...</li>
+                <li>In the Triggers tab, create a new trigger</li>
+                <ul>
+                    <li>Begin the task: At startup</li>
+                    <li>Repeat task every: 15 minutes for a duration of Indefinitely</li>
+                </ul>
+                <li>In the Actions tab, create a new action</li>
+                <ul>
+                    <li>Program/script: <pre>powershell</pre></li>
+                    <li>Add arguments (optional): <pre>-NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadString('{{getUpdateURL(ipthost)}}'))"</pre></li>
+                </ul>
+            </ul>
+        </div>
+        <div data-ng-show="hostType=='Linux'">
+            <div>Linux Instructions</div>
+            <div>To update this computer's IP Address, call this URL:</div>
+            <div>{{getUpdateURL(ipthost)}}</div>
+        </div>
     </div>
 </section>
