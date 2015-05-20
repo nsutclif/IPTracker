@@ -18,9 +18,9 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 				alertTimeoutMinutes: this.alertTimeoutMinutes
 			});
 
-            if (!this.alertOnChange) {
-                ipthost.alertTimeoutMinutes = 0;
-            }
+			if (!this.alertOnTimeout) {
+				ipthost.alertTimeoutMinutes = 0;
+			}
 
 			// Redirect after save
 			ipthost.$save(function(response) {
@@ -57,6 +57,10 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 		$scope.update = function() {
 			var ipthost = $scope.ipthost ;
 
+			if (!this.alertOnTimeout) {
+				ipthost.alertTimeoutMinutes = 0;
+			}
+
 			ipthost.$update(function() {
 				$location.path('ipthosts/' + ipthost._id);
 			}, function(errorResponse) {
@@ -71,8 +75,14 @@ angular.module('ipthosts').controller('IpthostsController', ['$scope', '$statePa
 
 		// Find existing Ipthost
 		$scope.findOne = function() {
-			$scope.ipthost = Ipthosts.get({ 
+			$scope.ipthost = Ipthosts.get({
 				ipthostId: $stateParams.ipthostId
+			}, function(ipthost) {
+				if (ipthost.alertTimeoutMinutes !== 0) {
+					ipthost.alertOnTimeout = true;
+				} else {
+					ipthost.alertTimeoutMinutes = 15;
+				}
 			});
 		};
 
