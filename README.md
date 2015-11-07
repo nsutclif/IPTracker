@@ -9,9 +9,6 @@ This is my first single page web application!  I built it just to see how the pi
 ## Installation
 Refer to documentation at [MEAN.JS](http://meanjs.org)
 
-## Live Demo
-http://iptrackertn.herokuapp.com/
-
 ## Credits
 Built on [MEAN.JS](http://meanjs.org)
 Built by Nathan Sutcliffe
