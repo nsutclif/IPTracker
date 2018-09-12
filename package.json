@@ -47,7 +47,7 @@
 	  	"grunt-nodemon": "~0.3.0",
 	  	"grunt-concurrent": "~1.0.0",
 	  	"grunt-mocha-test": "~0.12.1",
-	  	"grunt-karma": "~0.9.0",
+	  	"grunt-karma": "~3.0.0",
 	  	"load-grunt-tasks": "~0.6.0",
 		"glob": "~4.0.5",
 		"async": "~0.9.0",
